@@ -1,16 +1,24 @@
 #include <iostream>
 #include <time.h>
 
+//реализацию этих функций надо вынести в файл sorts.c
+//объявление этих функций надо вынести в файл sorts.h
+
+
 void InsertSort(int* ar, int size) {
-    int i, j, digit;
+    int i, j, digit;	//объявление переменных без из инициализации дурной тон... тем более, что переменная i является локальной в цикле for
+//и после цикла ты ей не пользуешься....
     for (i = 1; i < size; i++) {
         digit = ar[i];
-        j = i - 1;
+        j = i - 1;	//если здесь вычитаешь 1 ниже добавляешь на строчке 21 и 24.. не очень понятно....
 
         while (ar[j] < digit) {
             if (j < 0) {
                 break;
             }
+//если ты пользуешься обращением к элементам таким способом *(ar+ ....), то надо везде также и обращаться
+//а не в одном месте обращаться так *(ar+...), а в другом так - ar[] 
+//исправь пожалуйста
             *(ar + j + 1) = ar[j];
             j--;
         }
@@ -18,7 +26,7 @@ void InsertSort(int* ar, int size) {
     }
 }
 
-void fillRandom(int* firstElementOfArray, int size) {
+void fillRandom(int* firstElementOfArray/*хорошее название но может запутать, понятно что сюда передаешь массив, лучше назвать проще*/, int size) {
     srand(time(nullptr));
     for (int i = 0; i < size; i++) {
         *(firstElementOfArray + i) = rand() % 100;
